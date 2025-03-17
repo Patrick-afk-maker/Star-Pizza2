@@ -52,13 +52,13 @@ function renderContent(data) {
         pizzasSection.innerHTML = `<h2>Vores Pizzaer</h2>${pizzasList}`;
     }
 
-    // Kun på drinks.html: Vis drikkevarer
+  // Kun på drinks.html: Vis drikkevarer
     const drinksSection = document.querySelector('.drinks');
     if (drinksSection && window.location.pathname.includes("drinks.html")) {
         const drinksList = data.drinks.map(drink => `
             <div class="drink-item">
                 <h3>${drink.name}</h3>
-                <a href="${drink.image}" target="_blank">
+                <a href="${drink.big_image}" target="_blank">
                     <img class="Hpizza-image" src="${drink.image}" alt="${drink.name}" title="${drink.name}">
                 </a>
             </div>
