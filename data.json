@@ -19,9 +19,9 @@
         { "name": "Pepperoni", "ingredients": "Tomato, Cheese, Pepperoni, Pineapple", "image": "image/pepperoni_small.jpg", "big_image": "image/pepperoni_big.jpg" }
     ],
     "drinks": [
-        { "name": "Cola", "image": "image/Cola.png", "big_image": "image/Cola.png" },
-        { "name": "Fanta", "image": "image/Fanta.png", "big_image": "image/Fanta.png" },
-        { "name": "Sprite", "image": "image/Sprite.png", "big_image": "image/Sprite.png" },
-        { "name": "1.5L Cola (Free with pizza offer)", "image": "image/Cola_and_pizza.png", "big_image": "image/Cola_and_pizza.png" }
+        { "name": "Cola", "image": "image/Cola.png", "image": "image/Cola.png" },
+        { "name": "Fanta", "image": "image/Fanta.png", "image": "image/Fanta.png" },
+        { "name": "Sprite", "image": "image/Sprite.png", "image": "image/Sprite.png" },
+        { "name": "1.5L Cola (Free with pizza offer)", "image": "image/Cola_and_pizza.png", "image": "image/Cola_and_pizza.png" }
     ]
 }
