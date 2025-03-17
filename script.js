@@ -18,28 +18,27 @@ async function fetchData() {
 
 // Funktion til at vise data på den korrekte side
 function renderContent(data) {
-    // Kun på index.html: Vis velkomst og åbningstider
-    if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
-        const welcomeSection = document.querySelector('.welcome');
-        if (welcomeSection) {
-            welcomeSection.innerHTML = `
-                <h2>${data.welcome.heading}</h2>
-                <p>${data.welcome.text1}</p>
-                <p>${data.welcome.text2}</p>
-                <p><strong>${data.welcome.offer}</strong></p>
-            `;
-        }
-
-        const hoursSection = document.querySelector('.opening-hours');
-        if (hoursSection) {
-            const hoursList = data.opening_hours.map(hour => `<li>${hour}</li>`).join('');
-            hoursSection.innerHTML = `<h3>Åbningstider</h3><ul>${hoursList}</ul>`;
-        }
+    // Tjekker, om velkomstsektionen findes (kun på index.html)
+    const welcomeSection = document.querySelector('.welcome');
+    if (welcomeSection) {
+        welcomeSection.innerHTML = `
+            <h2>${data.welcome.heading}</h2>
+            <p>${data.welcome.text1}</p>
+            <p>${data.welcome.text2}</p>
+            <p><strong>${data.welcome.offer}</strong></p>
+        `;
     }
 
-    // Kun på pizzas.html: Vis pizza-menu
+    // Tjekker, om åbningstider sektionen findes (kun på index.html)
+    const hoursSection = document.querySelector('.opening-hours');
+    if (hoursSection) {
+        const hoursList = data.opening_hours.map(hour => `<li>${hour}</li>`).join('');
+        hoursSection.innerHTML = `<h3>Åbningstider</h3><ul>${hoursList}</ul>`;
+    }
+
+    // Tjekker, om pizza-sektionen findes (på index.html og pizzas.html)
     const pizzasSection = document.querySelector('.pizzas');
-    if (pizzasSection && window.location.pathname.includes("pizzas.html")) {
+    if (pizzasSection) {
         const pizzasList = data.pizzas.map(pizza => `
             <div class="pizza-item">
                 <h3>${pizza.name}</h3>
@@ -50,9 +49,9 @@ function renderContent(data) {
         pizzasSection.innerHTML = `<h2>Vores Pizzaer</h2>${pizzasList}`;
     }
 
-    // Kun på drinks.html: Vis drikkevarer
+    // Tjekker, om drikkevare-sektionen findes (på index.html og drinks.html)
     const drinksSection = document.querySelector('.drinks');
-    if (drinksSection && window.location.pathname.includes("drinks.html")) {
+    if (drinksSection) {
         const drinksList = data.drinks.map(drink => `
             <div class="drink-item">
                 <h3>${drink.name}</h3>
