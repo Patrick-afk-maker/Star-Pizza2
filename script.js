@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Hent data fra JSON-filen
     fetchData();
 });
 
-// Funktion til at hente data
+// Funktion til at hente JSON-data
 async function fetchData() {
     try {
         const response = await fetch('data.json');  // URL til JSON-filen
@@ -17,35 +16,48 @@ async function fetchData() {
     }
 }
 
-// Funktion til at vise data på hjemmesiden
+// Funktion til at vise data på den korrekte side
 function renderContent(data) {
-    // Velkomstsektion
+    // Tjekker, om velkomstsektionen findes (kun på index.html)
     const welcomeSection = document.querySelector('.welcome');
-    welcomeSection.innerHTML = `
-        <h2>${data.welcome.heading}</h2>
-        <p>${data.welcome.text1}</p>
-        <p>${data.welcome.text2}</p>
-        <p><strong>${data.welcome.offer}</strong></p>
-    `;
+    if (welcomeSection) {
+        welcomeSection.innerHTML = `
+            <h2>${data.welcome.heading}</h2>
+            <p>${data.welcome.text1}</p>
+            <p>${data.welcome.text2}</p>
+            <p><strong>${data.welcome.offer}</strong></p>
+        `;
+    }
 
-    // Åbningstider
+    // Tjekker, om åbningstider sektionen findes (kun på index.html)
     const hoursSection = document.querySelector('.opening-hours');
-    const hoursList = data.opening_hours.map(hour => `<li>${hour}</li>`).join('');
-    hoursSection.innerHTML = `<h3>Åbningstider</h3><ul>${hoursList}</ul>`;
+    if (hoursSection) {
+        const hoursList = data.opening_hours.map(hour => `<li>${hour}</li>`).join('');
+        hoursSection.innerHTML = `<h3>Åbningstider</h3><ul>${hoursList}</ul>`;
+    }
 
-    // Pizza-menu
+    // Tjekker, om pizza-sektionen findes (på index.html og pizzas.html)
     const pizzasSection = document.querySelector('.pizzas');
-    const pizzasList = data.pizzas.map(pizza => `
-        <li><strong>${pizza.name}:</strong> ${pizza.ingredients}</li>
-        <a href="${pizza.image}" target="_blank"><img src="${pizza.image}" alt="${pizza.name}" title="${pizza.name}"></a>
-    `).join('');
-    pizzasSection.innerHTML = `<h2>Vores Pizzaer</h2><ul>${pizzasList}</ul>`;
+    if (pizzasSection) {
+        const pizzasList = data.pizzas.map(pizza => `
+            <div class="pizza-item">
+                <h3>${pizza.name}</h3>
+                <p><strong>Ingredienser:</strong> ${pizza.ingredients}</p>
+                <img class="pizza-image" src="${pizza.image}" alt="${pizza.name}" title="${pizza.name}">
+            </div>
+        `).join('');
+        pizzasSection.innerHTML = `<h2>Vores Pizzaer</h2>${pizzasList}`;
+    }
 
-    // Drikkevarer
+    // Tjekker, om drikkevare-sektionen findes (på index.html og drinks.html)
     const drinksSection = document.querySelector('.drinks');
-    const drinksList = data.drinks.map(drink => `
-        <li>${drink.name}</li>
-        <img src="${drink.image}" alt="${drink.name}" title="${drink.name}" />
-    `).join('');
-    drinksSection.innerHTML = `<h2>Vores Drikkevarer</h2><ul>${drinksList}</ul>`;
+    if (drinksSection) {
+        const drinksList = data.drinks.map(drink => `
+            <div class="drink-item">
+                <h3>${drink.name}</h3>
+                <img class="Hpizza-image" src="${drink.image}" alt="${drink.name}" title="${drink.name}">
+            </div>
+        `).join('');
+        drinksSection.innerHTML = `<h2>Vores Drikkevarer</h2>${drinksList}`;
+    }
 }
