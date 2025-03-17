@@ -1,0 +1,27 @@
+{
+    "welcome": {
+        "heading": "Velkommen til Star Pizza!",
+        "text1": "At Star Pizza we use only quality ingredients and prepare the food under hygienic conditions.",
+        "text2": "Dear Customer! We can deliver food for your lunch break if your order at least 2 hours before delivery.",
+        "offer": "Free delivery every day when buying for at least kr. 110,-."
+    },
+    "opening_hours": [
+        "Monday, Tuesday: 15.00 - 22.00",
+        "Wednesday: 15.00 - 22.00",
+        "Thursday, Friday: 15.00 - 22.00",
+        "Saturday, Sunday: 13.00 - 22.00"
+    ],
+    "pizzas": [
+        { "name": "Margarita", "ingredients": "Tomato, Cheese", "image": "margherita_small.jpg" },
+        { "name": "Hawaii", "ingredients": "Tomato, Cheese, Ham, Pineapple", "image": "hawaiian_small.jpg" },
+        { "name": "Milano", "ingredients": "Tomato, Cheese, Ham, Mushrooms", "image": "supreme_small.jpg" },
+        { "name": "Mamma Mia", "ingredients": "Tomato, Cheese, Ham, Pepperoni, Onions", "image": "curry_chicken_small.jpg" },
+        { "name": "Pepperoni", "ingredients": "Tomato, Cheese, Pepperoni, Pineapple", "image": "pepperoni_small.jpg" }
+    ],
+    "drinks": [
+        { "name": "Cola", "image": "Cola.png" },
+        { "name": "Fanta", "image": "Fanta.png" },
+        { "name": "Sprite", "image": "Sprite.png" },
+        { "name": "1.5L Cola (Free with pizza offer)", "image": "Cola_and_pizza.png" }
+    ]
+}
