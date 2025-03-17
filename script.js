@@ -58,7 +58,7 @@ function renderContent(data) {
         const drinksList = data.drinks.map(drink => `
             <div class="drink-item">
                 <h3>${drink.name}</h3>
-                <a href="${drink.big_image}" target="_blank">
+                <a href="${drink.image}" target="_blank">
                     <img class="Hpizza-image" src="${drink.image}" alt="${drink.name}" title="${drink.name}">
                 </a>
             </div>
