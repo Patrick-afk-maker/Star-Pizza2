@@ -42,7 +42,7 @@ function renderContent(data) {
     if (pizzasSection && window.location.pathname.includes("pizzas.html")) {
         const pizzasList = data.pizzas.map(pizza => `
             <div class="pizza-item">
-                <h3>${pizza.name}</h3>
+                <h3>${pizza.name} - <span class="price">${pizza.price} kr.</span></h3>
                 <p><strong>Ingredienser:</strong> ${pizza.ingredients}</p>
                 <a href="${pizza.big_image}" target="_blank">
                     <img class="pizza-image" src="${pizza.image}" alt="${pizza.name}" title="${pizza.name}">
@@ -57,7 +57,7 @@ function renderContent(data) {
     if (drinksSection && window.location.pathname.includes("drinks.html")) {
         const drinksList = data.drinks.map(drink => `
             <div class="drink-item">
-                <h3>${drink.name}</h3>
+                <h3>${drink.name} - <span class="price">${drink.price === 0 ? "Gratis" : drink.price + " kr."}</span></h3>
                 <a href="${drink.big_image}" target="_blank">
                     <img class="Hpizza-image" src="${drink.image}" alt="${drink.name}" title="${drink.name}">
                 </a>
