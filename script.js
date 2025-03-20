@@ -5,13 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Funktion til at hente JSON-data
 async function fetchData() {
+    console.log("fetchData kaldt på:", window.location.pathname); // Debugging
     try {
-        console.log("Indlæser data for:", window.location.pathname);
         const response = await fetch("data.json"); // Henter JSON-filen
         if (!response.ok) {
             throw new Error("Netværksresponsen var ikke ok");
         }
         const data = await response.json();
+        console.log("Data hentet:", data); // Debugging
         renderContent(data);
     } catch (error) {
         console.error("Der opstod en fejl ved hentning af data:", error);
@@ -46,7 +47,7 @@ function renderContent(data) {
         }
     }
 
-    if (path.includes("menu.html")) {
+    if (path.includes("menu.html") || path.includes("pizzas.html") || path.includes("drinks.html")) {
         renderPizzas(data.pizzas);
         renderDrinks(data.drinks);
     }
@@ -59,7 +60,10 @@ function renderContent(data) {
 // Funktion til at vise pizzaer
 function renderPizzas(pizzas) {
     const pizzasSection = document.querySelector(".pizzas");
-    if (!pizzasSection) return;
+    if (!pizzasSection) {
+        console.warn("Ingen .pizzas-sektion fundet på denne side.");
+        return;
+    }
 
     const pizzasList = pizzas.map(pizza => `
         <div class="pizza-item">
@@ -77,13 +81,16 @@ function renderPizzas(pizzas) {
 // Funktion til at vise drikkevarer
 function renderDrinks(drinks) {
     const drinksSection = document.querySelector(".drinks");
-    if (!drinksSection) return;
+    if (!drinksSection) {
+        console.warn("Ingen .drinks-sektion fundet på denne side.");
+        return;
+    }
 
     const drinksList = drinks.map(drink => `
         <div class="drink-item">
             <h3>${drink.name} - <span class="price">${drink.price === 0 ? "Gratis" : drink.price + " kr."}</span></h3>
             <a href="${drink.big_image}" target="_blank">
-                <img class="Hpizza-image" src="${drink.image}" alt="${drink.name}" title="${drink.name}">
+                <img class="drink-image" src="${drink.image}" alt="${drink.name}" title="${drink.name}">
             </a>
             <button onclick="addToCart('${drink.name}', ${drink.price})">Tilføj til kurv</button>
         </div>
