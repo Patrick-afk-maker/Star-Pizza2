@@ -35,7 +35,7 @@ function renderPizzas(pizzas) {
     const pizzasSection = document.querySelector(".pizzas");
     if (!pizzasSection) return;
 
-    const pizzasList = pizzas.map(pizza => 
+    const pizzasList = pizzas.map(pizza => `
         <div class="pizza-item">
             <h3>${pizza.name} - <span class="price">${pizza.price} kr.</span></h3>
             <p><strong>Ingredienser:</strong> ${pizza.ingredients}</p>
@@ -44,8 +44,8 @@ function renderPizzas(pizzas) {
             </a>
             <button onclick="addToCart('${pizza.name}', ${pizza.price})">Tilføj til kurv</button>
         </div>
-    ).join('');
-    pizzasSection.innerHTML = <h2>Vores Pizzaer</h2>${pizzasList};
+    `).join('');
+    pizzasSection.innerHTML = `<h2>Vores Pizzaer</h2>${pizzasList}`;
 }
 
 // Funktion til at vise drikkevarer
@@ -53,7 +53,7 @@ function renderDrinks(drinks) {
     const drinksSection = document.querySelector(".drinks");
     if (!drinksSection) return;
 
-    const drinksList = drinks.map(drink => 
+    const drinksList = drinks.map(drink => `
         <div class="drink-item">
             <h3>${drink.name} - <span class="price">${drink.price === 0 ? "Gratis" : drink.price + " kr."}</span></h3>
             <a href="${drink.big_image}" target="_blank">
@@ -61,8 +61,8 @@ function renderDrinks(drinks) {
             </a>
             <button onclick="addToCart('${drink.name}', ${drink.price})">Tilføj til kurv</button>
         </div>
-    ).join('');
-    drinksSection.innerHTML = <h2>Vores Drikkevarer</h2>${drinksList};
+    `).join('');
+    drinksSection.innerHTML = `<h2>Vores Drikkevarer</h2>${drinksList}`;
 }
 
 // Funktion til at tilføje varer til kurven
@@ -87,22 +87,22 @@ function updateCartDisplay() {
         return;
     }
 
-    const cartList = cart.map((item, index) => 
+    const cartList = cart.map((item, index) => `
         <div class="cart-item">
             <p>${item.name} - ${item.price} kr. x ${item.quantity} = ${item.price * item.quantity} kr.</p>
             <button onclick="increaseQuantity(${index})">+</button>
             <button onclick="decreaseQuantity(${index})">-</button>
             <button onclick="removeFromCart(${index})">Fjern</button>
         </div>
-    ).join('');
+    `).join('');
 
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    cartSection.innerHTML = 
+    cartSection.innerHTML = `
         <h2>Indkøbskurv</h2>
         ${cartList}
         <h3>Samlet pris: ${totalPrice} kr.</h3>
-    ;
+    `;
 }
 
 // Funktion til at øge mængden af en vare
@@ -129,7 +129,6 @@ function removeFromCart(index) {
     saveCart();
     updateCartDisplay();
 }
-
 
 // Funktion til at gemme kurven i localStorage
 function saveCart() {
