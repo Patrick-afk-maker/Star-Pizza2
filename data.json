@@ -12,16 +12,16 @@
         "Saturday, Sunday: 13.00 - 22.00"
     ],
    "pizzas": [
-        { "name": "Margarita", "ingredients": "Tomato, Cheese", "image": "image/margherita_small.jpg", "big_image": "image/margherita_big.jpg" },
-        { "name": "Hawaii", "ingredients": "Tomato, Cheese, Ham, Pineapple", "image": "image/hawaiian_small.jpg", "big_image": "image/hawaiian_big.jpg" },
-        { "name": "Milano", "ingredients": "Tomato, Cheese, Ham, Mushrooms", "image": "image/supreme_small.jpg", "big_image": "image/supreme_big.jpg" },
-        { "name": "Mamma Mia", "ingredients": "Tomato, Cheese, Ham, Pepperoni, Onions", "image": "image/curry_chicken_small.jpg", "big_image": "image/curry_chicken_big.jpg" },
-        { "name": "Pepperoni", "ingredients": "Tomato, Cheese, Pepperoni, Pineapple", "image": "image/pepperoni_small.jpg", "big_image": "image/pepperoni_big.jpg" }
+        { "name": "Margarita", "ingredients": "Tomato, Cheese", "image": "image/margherita_small.jpg", "big_image": "image/margherita_big.jpg", "price": 79 },
+        { "name": "Hawaii", "ingredients": "Tomato, Cheese, Ham, Pineapple", "image": "image/hawaiian_small.jpg", "big_image": "image/hawaiian_big.jpg", "price": 89 },
+        { "name": "Milano", "ingredients": "Tomato, Cheese, Ham, Mushrooms", "image": "image/supreme_small.jpg", "big_image": "image/supreme_big.jpg", "price": 95 },
+        { "name": "Mamma Mia", "ingredients": "Tomato, Cheese, Ham, Pepperoni, Onions", "image": "image/curry_chicken_small.jpg", "big_image": "image/curry_chicken_big.jpg", "price": 99 },
+        { "name": "Pepperoni", "ingredients": "Tomato, Cheese, Pepperoni, Pineapple", "image": "image/pepperoni_small.jpg", "big_image": "image/pepperoni_big.jpg", "price": 89 }
     ],
     "drinks": [
-        { "name": "Cola", "image": "image/Cola.png", "big_image": "image/Cola_large.png" },
-        { "name": "Fanta", "image": "image/Fanta.png", "big_image": "image/Fanta_large.png" },
-        { "name": "Sprite", "image": "image/Sprite.png", "big_image": "image/Sprite_large.png" },
-        { "name": "1.5L Cola (Free with pizza offer)", "image": "image/Cola_and_pizza.png", "big_image": "image/Cola_and_pizza_large.png" }
+        { "name": "Cola", "image": "image/Cola.png", "big_image": "image/Cola_large.png", "price": 25 },
+        { "name": "Fanta", "image": "image/Fanta.png", "big_image": "image/Fanta_large.png", "price": 25 },
+        { "name": "Sprite", "image": "image/Sprite.png", "big_image": "image/Sprite_large.png", "price": 25 },
+        { "name": "1.5L Cola (Free with pizza offer)", "image": "image/Cola_and_pizza.png", "big_image": "image/Cola_and_pizza_large.png", "price": 0 }
     ]
 }
