@@ -5,14 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Funktion til at hente JSON-data
 async function fetchData() {
-    console.log("fetchData kaldt på:", window.location.pathname); // Debugging
     try {
+        console.log("Indlæser data for:", window.location.pathname);
         const response = await fetch("data.json"); // Henter JSON-filen
         if (!response.ok) {
             throw new Error("Netværksresponsen var ikke ok");
         }
         const data = await response.json();
-        console.log("Data hentet:", data); // Debugging
         renderContent(data);
     } catch (error) {
         console.error("Der opstod en fejl ved hentning af data:", error);
@@ -32,22 +31,22 @@ function renderContent(data) {
     if (path.includes("index.html") || path === "/" || !path.includes(".html")) {
         const welcomeSection = document.querySelector('.welcome');
         if (welcomeSection) {
-            welcomeSection.innerHTML = `
+            welcomeSection.innerHTML = 
                 <h2>${data.welcome.heading}</h2>
                 <p>${data.welcome.text1}</p>
                 <p>${data.welcome.text2}</p>
                 <p><strong>${data.welcome.offer}</strong></p>
-            `;
+            ;
         }
 
         const hoursSection = document.querySelector('.opening-hours');
         if (hoursSection) {
-            const hoursList = data.opening_hours.map(hour => `<li>${hour}</li>`).join('');
-            hoursSection.innerHTML = `<h3>Åbningstider</h3><ul>${hoursList}</ul>`;
+            const hoursList = data.opening_hours.map(hour => <li>${hour}</li>).join('');
+            hoursSection.innerHTML = <h3>Åbningstider</h3><ul>${hoursList}</ul>;
         }
     }
 
-    if (path.includes("menu.html") || path.includes("pizzas.html") || path.includes("drinks.html")) {
+    if (path.includes("menu.html")) {
         renderPizzas(data.pizzas);
         renderDrinks(data.drinks);
     }
@@ -60,12 +59,9 @@ function renderContent(data) {
 // Funktion til at vise pizzaer
 function renderPizzas(pizzas) {
     const pizzasSection = document.querySelector(".pizzas");
-    if (!pizzasSection) {
-        console.warn("Ingen .pizzas-sektion fundet på denne side.");
-        return;
-    }
+    if (!pizzasSection) return;
 
-    const pizzasList = pizzas.map(pizza => `
+    const pizzasList = pizzas.map(pizza => 
         <div class="pizza-item">
             <h3>${pizza.name} - <span class="price">${pizza.price} kr.</span></h3>
             <p><strong>Ingredienser:</strong> ${pizza.ingredients}</p>
@@ -74,26 +70,23 @@ function renderPizzas(pizzas) {
             </a>
             <button onclick="addToCart('${pizza.name}', ${pizza.price})">Tilføj til kurv</button>
         </div>
-    `).join('');
-    pizzasSection.innerHTML = `<h2>Vores Pizzaer</h2>${pizzasList}`;
+    ).join('');
+    pizzasSection.innerHTML = <h2>Vores Pizzaer</h2>${pizzasList};
 }
 
 // Funktion til at vise drikkevarer
 function renderDrinks(drinks) {
     const drinksSection = document.querySelector(".drinks");
-    if (!drinksSection) {
-        console.warn("Ingen .drinks-sektion fundet på denne side.");
-        return;
-    }
+    if (!drinksSection) return;
 
-    const drinksList = drinks.map(drink => `
+    const drinksList = drinks.map(drink => 
         <div class="drink-item">
             <h3>${drink.name} - <span class="price">${drink.price === 0 ? "Gratis" : drink.price + " kr."}</span></h3>
             <a href="${drink.big_image}" target="_blank">
-                <img class="drink-image" src="${drink.image}" alt="${drink.name}" title="${drink.name}">
+                <img class="Hpizza-image" src="${drink.image}" alt="${drink.name}" title="${drink.name}">
             </a>
             <button onclick="addToCart('${drink.name}', ${drink.price})">Tilføj til kurv</button>
         </div>
-    `).join('');
-    drinksSection.innerHTML = `<h2>Vores Drikkevarer</h2>${drinksList}`;
+    ).join('');
+    drinksSection.innerHTML = <h2>Vores Drikkevarer</h2>${drinksList};
 }
