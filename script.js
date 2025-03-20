@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // Funktion til at hente JSON-data
 async function fetchData() {
     try {
-        console.log("Indlæser data for:", window.location.pathname);
         const response = await fetch("data.json"); // Henter JSON-filen
         if (!response.ok) {
             throw new Error("Netværksresponsen var ikke ok");
@@ -26,9 +25,8 @@ function renderContent(data) {
     console.log("Pizzadata:", data.pizzas);  // Debugging
     console.log("Drikkedata:", data.drinks); // Debugging
 
-    const path = window.location.pathname;
-
-    if (path.includes("index.html") || path === "/" || !path.includes(".html")) {
+    // Kun på index.html: Vis velkomst og åbningstider
+    if (window.location.pathname.includes("index.html") || window.location.pathname === "/" || !window.location.pathname.includes(".html")) {
         const welcomeSection = document.querySelector('.welcome');
         if (welcomeSection) {
             welcomeSection.innerHTML = 
@@ -46,15 +44,10 @@ function renderContent(data) {
         }
     }
 
-    if (path.includes("menu.html")) {
-        renderPizzas(data.pizzas);
-        renderDrinks(data.drinks);
-    }
-
-    if (path.includes("cart.html")) {
-        updateCartDisplay();
-    }
+    // Indlæser kurven korrekt
+    updateCartDisplay();
 }
+
 
 // Funktion til at vise pizzaer
 function renderPizzas(pizzas) {
@@ -89,4 +82,82 @@ function renderDrinks(drinks) {
         </div>
     ).join('');
     drinksSection.innerHTML = <h2>Vores Drikkevarer</h2>${drinksList};
+}
+
+// Funktion til at tilføje varer til kurven
+function addToCart(name, price) {
+    let item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity++;
+    } else {
+        cart.push({ name, price, quantity: 1 });
+    }
+    saveCart();
+    updateCartDisplay();
+}
+
+// Funktion til at opdatere visningen af kurven
+function updateCartDisplay() {
+    const cartSection = document.querySelector(".cart");
+    if (!cartSection) return;
+
+    if (cart.length === 0) {
+        cartSection.innerHTML = "<p>Kurven er tom.</p>";
+        return;
+    }
+
+    const cartList = cart.map((item, index) => 
+        <div class="cart-item">
+            <p>${item.name} - ${item.price} kr. x ${item.quantity} = ${item.price * item.quantity} kr.</p>
+            <button onclick="increaseQuantity(${index})">+</button>
+            <button onclick="decreaseQuantity(${index})">-</button>
+            <button onclick="removeFromCart(${index})">Fjern</button>
+        </div>
+    ).join('');
+
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    cartSection.innerHTML = 
+        <h2>Indkøbskurv</h2>
+        ${cartList}
+        <h3>Samlet pris: ${totalPrice} kr.</h3>
+    ;
+}
+
+// Funktion til at øge mængden af en vare
+function increaseQuantity(index) {
+    cart[index].quantity++;
+    saveCart();
+    updateCartDisplay();
+}
+
+// Funktion til at mindske mængden af en vare
+function decreaseQuantity(index) {
+    if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+    } else {
+        cart.splice(index, 1); // Fjern varen helt
+    }
+    saveCart();
+    updateCartDisplay();
+}
+
+// Funktion til at fjerne en vare fra kurven
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+    updateCartDisplay();
+}
+
+// Funktion til at gemme kurven i localStorage
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Funktion til at indlæse kurven fra localStorage
+function loadCart() {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+    }
 }
