@@ -77,3 +77,8 @@ ul {
 ul li {
     margin-bottom: 10px;
 }
+
+.price {
+    color: #ff4500;
+    font-weight: bold;
+}
