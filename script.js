@@ -20,15 +20,26 @@ async function fetchData() {
 // Kurv-array til at gemme valgte varer
 let cart = [];
 
-// Funktion til at vise data på de rigtige sider
+// Funktion til at vise data på den korrekte side
 function renderContent(data) {
-    if (window.location.pathname.includes("pizzas.html")) {
-        renderPizzas(data.pizzas);
-    } else if (window.location.pathname.includes("drinks.html")) {
-        renderDrinks(data.drinks);
+    // Kun på index.html: Vis velkomst og åbningstider
+    if (window.location.pathname.includes("index.html") || window.location.pathname === "/" || !window.location.pathname.includes(".html")) {
+        const welcomeSection = document.querySelector('.welcome');
+        if (welcomeSection) {
+            welcomeSection.innerHTML = `
+                <h2>${data.welcome.heading}</h2>
+                <p>${data.welcome.text1}</p>
+                <p>${data.welcome.text2}</p>
+                <p><strong>${data.welcome.offer}</strong></p>
+            `;
+        }
+
+        const hoursSection = document.querySelector('.opening-hours');
+        if (hoursSection) {
+            const hoursList = data.opening_hours.map(hour => `<li>${hour}</li>`).join('');
+            hoursSection.innerHTML = `<h3>Åbningstider</h3><ul>${hoursList}</ul>`;
+        }
     }
-    updateCartDisplay();
-}
 
 // Funktion til at vise pizzaer
 function renderPizzas(pizzas) {
