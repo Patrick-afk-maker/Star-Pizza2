@@ -52,7 +52,7 @@ function renderContent(data) {
         pizzasSection.innerHTML = `<h2>Vores Pizzaer</h2>${pizzasList}`;
     }
 
-  // Kun på drinks.html: Vis drikkevarer
+    // Kun på drinks.html: Vis drikkevarer
     const drinksSection = document.querySelector('.drinks');
     if (drinksSection && window.location.pathname.includes("drinks.html")) {
         const drinksList = data.drinks.map(drink => `
