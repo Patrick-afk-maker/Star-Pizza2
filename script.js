@@ -22,12 +22,37 @@ let cart = [];
 
 // Funktion til at vise data på de rigtige sider
 function renderContent(data) {
-    if (window.location.pathname.includes("pizzas.html")) {
+    // Debug: Udskriv data i Console for at sikre, at priserne er der
+    console.log("Pizzadata:", data.pizzas);
+    console.log("Drikkedata:", data.drinks);
+
+    if (window.location.pathname.includes("index.html") || window.location.pathname === "/" || !window.location.pathname.includes(".html")) {
+        renderIndex(data);
+    } else if (window.location.pathname.includes("pizzas.html")) {
         renderPizzas(data.pizzas);
     } else if (window.location.pathname.includes("drinks.html")) {
         renderDrinks(data.drinks);
     }
     updateCartDisplay();
+}
+
+// Funktion til at vise index-siden (velkomst & åbningstider)
+function renderIndex(data) {
+    const welcomeSection = document.querySelector('.welcome');
+    if (welcomeSection) {
+        welcomeSection.innerHTML = `
+            <h2>${data.welcome.heading}</h2>
+            <p>${data.welcome.text1}</p>
+            <p>${data.welcome.text2}</p>
+            <p><strong>${data.welcome.offer}</strong></p>
+        `;
+    }
+
+    const hoursSection = document.querySelector('.opening-hours');
+    if (hoursSection) {
+        const hoursList = data.opening_hours.map(hour => `<li>${hour}</li>`).join('');
+        hoursSection.innerHTML = `<h3>Åbningstider</h3><ul>${hoursList}</ul>`;
+    }
 }
 
 // Funktion til at vise pizzaer
