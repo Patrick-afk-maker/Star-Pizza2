@@ -18,6 +18,10 @@ async function fetchData() {
 
 // Funktion til at vise data på den korrekte side
 function renderContent(data) {
+
+    console.log("Pizzadata:", data.pizzas);
+    console.log("Drikkedata:", data.drinks);
+    
     // Kun på index.html: Vis velkomst og åbningstider
     if (window.location.pathname.includes("index.html") || window.location.pathname === "/" || !window.location.pathname.includes(".html")) {
         const welcomeSection = document.querySelector('.welcome');
